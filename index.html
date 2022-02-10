@@ -47,9 +47,16 @@
                     <p id="ingredient-text">Search for a new recipe! Just enter an ingredient, and let us do the rest!</p>
                     <h5 class=“card-header text-uppercase col m4 l3”>Search by ingredient here: </h5>
                     <form id=“ingredient-form” class=“card-body”>
-                        <input name=“ingredient ” id=“ingredient” type=“text” autofocus=“true” class=“form-input” />
+                        <input name=“ingredient ” id=“ingredient” type=“text” autofocus=“true” class=“form-input” autocomplete="off"/>
                         <button type=“submit” id="btn-search" class=“btn” onclick="getRecipes(event)">Get Recipes</button>
                     </form>
+                    <h5 class=card-header text-uppercase col m4 l3”>Search History:</h5>
+                    <div>
+                        <ul id="search-history">
+                            
+                        </ul>
+                    </div>
+                    <a id="clear-storage" href="#">Clear</a>
                 </div>
             </div>
 
@@ -83,7 +90,7 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="assets/js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    
 </body>
 
 </html>

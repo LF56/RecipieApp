@@ -2,14 +2,24 @@
 var ingredientInputEl = document.querySelector("input");
 var buttonEl = document.querySelector("#btn-search")
 // key entered by leah 2/8
-var APIKey = "f03e3391435141c3b9c073918195393b";
+// var APIKey = "5abc9afea0e92ae2318b5c8bf142f6cf";
 var recipeContainer = $("#recipe-container");
+var searchHistory = document.querySelector("#search-history");
+
+// localStorage.setItem(buttonEl);
 
 //recipes search function
+
+renderExistingIngredients();
 
 var getRecipes = function (e) {
   e.preventDefault()
   var value = ingredientInputEl.value
+
+
+  saveIngredientIfNotDuplicate(value);
+  renderExistingIngredients();
+
   //     var ingredient = document.getElementById("ingredient").value;
   // console.log(ingredient)
 recipeContainer.children().remove()
@@ -31,6 +41,39 @@ recipeContainer.children().remove()
       }
     })
 }
+
+function renderExistingIngredients() {
+  $("#search-history").empty();
+  for (let i = 0; i < localStorage.length; i++) {
+    $("#search-history").append("<li class=\"list-group-item\">" + localStorage["ingredient" + i] +  "</li>" );
+}
+}
+
+$(document).on("click", ".list-group-item", function() {
+  ingredientInputEl.value = $(this).text();
+  getRecipes(e);
+  alert(ingredientInputEl.value);
+});
+
+function saveIngredientIfNotDuplicate(newIngredient) {
+    var ingredientExists = false;
+
+    for (let i = 0; i < localStorage.length; i++) {
+      if (localStorage["ingredient" + i] === newIngredient) {
+        ingredientExists = true;
+        break;
+      }
+    }
+
+    if (ingredientExists === false) {
+      localStorage.setItem("ingredient" + localStorage.length, newIngredient);
+    }
+}
+
+$("#clear-storage").on("click", (event) => {
+  localStorage.clear();
+  renderExistingIngredients();
+});
 
 var getRecipeId = function (id) {
   console.log(id)
